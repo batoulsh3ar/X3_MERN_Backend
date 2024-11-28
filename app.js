@@ -3,8 +3,16 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const connectDB = require('./config/database')
+const session = require('epxress-session')
 
 connectDB()
+
+app.use(session({
+    secret: 'schoolWebsite', 
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } 
+}))
 
 const app = express()
 const PORT = 3000
