@@ -3,7 +3,7 @@ const Teacher = require('../models/teachers')
 const authorize = require('../authorize')
 const router = express.Router()
 
-router.get('/', authorize('admin'), async (req,res)=>{
+router.get('/',  async (req,res)=>{
     try {
         const teachers = await Teacher.find()
         res.status(200).json({teachers : teachers})
@@ -13,7 +13,7 @@ router.get('/', authorize('admin'), async (req,res)=>{
 
 })
 
-router.post('/', authorize('admin'), async (req,res)=>{
+router.post('/',  async (req,res)=>{
     try {
         const {image , name , specialize , description} = req.body
         const teacher = new Teacher({image , name , specialize , description})
@@ -24,7 +24,7 @@ router.post('/', authorize('admin'), async (req,res)=>{
     }
 })
 
-router.put('/:name', authorize('admin'), async (req,res)=>{
+router.put('/:name', async (req,res)=>{
     try {
         const teacher = await Teacher.findOneAndUpdate({ name : req.params.name } , req.body , { new: true })
         res.status(200).json({message : "teacher has been updated", teacher : teacher})
@@ -33,7 +33,7 @@ router.put('/:name', authorize('admin'), async (req,res)=>{
     }
 })
 
-router.delete('/:name', authorize('admin'), async (req,res)=>{
+router.delete('/:name',  async (req,res)=>{
     try {
         await Teacher.findOneAndDelete({ name : req.params.name })
         res.status(200).json({message : "teacher has been deleted"})
