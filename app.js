@@ -1,4 +1,13 @@
 
+require('dotenv').config();
+
+const express = require('express');
+const cors = require('cors');
+const connectDB = require('./config/database');
+
+connectDB();
+
+
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
@@ -7,8 +16,8 @@ const session = require('express-session');
 
 
 
-const app = express()
-const PORT = 3000
+const app = express();
+const PORT = 3000;
 
 connectDB()
 
@@ -31,3 +40,4 @@ app.use('/api/faqsection',require('./routes/faqSection'))
 app.listen(PORT , ()=>{
     console.log(`server is running on port : ${PORT}`)
 })
+
